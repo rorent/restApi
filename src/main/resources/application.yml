@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: restApi
+  profiles:
+    active: dev
+  data:
+    mongodb:
+      uri: mongodb+srv://rorent:0000@atlascluster.yb74g.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster@EnableMongoRepositories
+      database: test
+server:
+  port: 8888
