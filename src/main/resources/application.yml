@@ -1,11 +1,47 @@
+server:
+  port: 8888
+
 spring:
   application:
     name: restApi
   profiles:
-    active: dev
+    active: local
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/rorent?serverTimezone=UTC&characterEncoding=UTF-8
+      username: root
+      password: abcd123!      #대문자, 소문자, 숫자, 특수문자를 모두 포함해서 8자 이상의 길이로 설정필요
+      maximum-pool-size: 3
+      pool-name: Hikari Connection Pool
   data:
     mongodb:
       uri: mongodb+srv://rorent:0000@atlascluster.yb74g.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster@EnableMongoRepositories
       database: test
-server:
-  port: 8888
+  jpa:
+    database: mysql
+    #show-sql: true                       # System.out 으로 출력. logging.level.org.hibernate.SQL=debug 로 대체합니다.
+    hibernate:
+      # create : entity를 drop cascade 하고 다시 생성
+      # update : entity가 수정되면 수정된 내용만 반영
+      # create-drop,validate, none
+      # 하이버네이트가 자동으로 생성해주는 DDL은 신뢰성이 떨어지기 때문에
+      # 절대로! 운영DB 환경에서 그대로 사용하면 안되고, 직접 DDL을 작성하는 것을 권장
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy # lower snake case
+    properties:                         # Additional native properties to set on the JPA provider.
+      hibernate:
+        format_sql: true                # 로그, 콘솔의 SQL을 좀 더 이쁘게 출력합니다.
+        show_sql: true                  # System.out 으로 출력
+        use_sql_comments: true          # 보다 쉬운 디버깅을 위해 SQL 내부에 /* */의 주석을 추가합니다.
+        generate_statistics: true       # 통계 정보를 생성할지 여부
+        jdbc:
+          batch_size: 1000  # saveAll batch Insert and Update Option
+
+logging:
+  level:                                      # 각 package 별로 로깅 레벨을 지정할 수 있다.
+    org.hibernate.type: trace                 # 콘솔차에 조건에 바인딩되는 값 및 조회 결과 출력
+    org.hibernate.sql: debug                  # logger를 통해 하이버네이트 실행 SQL
+    org.hibernate.type.descriptor.sql: trace  # sql의 ? 값을 Parameter로 보여줌.
+    com.zaxxer.hikari.pool: debug
