@@ -2,6 +2,7 @@ package com.rorent.restapi.user.enums;
 
 import java.util.Arrays;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.rorent.restapi.config.LegacyCodeCommonType;
 
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ public enum Gender implements LegacyCodeCommonType {
 	private String code;
 	private String desc;
 
+	@JsonCreator	//RequestBody String to Enum Code Mapping
 	public static Gender ofCode(String code){
 		return Arrays.stream(Gender.values())
 				.filter(v -> v.getLegacyCode().equals(code))
@@ -30,4 +32,5 @@ public enum Gender implements LegacyCodeCommonType {
 	public String getDesc() {
 		return this.desc;
 	}
+
 }

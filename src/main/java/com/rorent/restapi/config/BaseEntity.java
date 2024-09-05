@@ -18,7 +18,6 @@ public abstract class BaseEntity {
 	@Column(updatable = false, nullable = false)
 	private LocalDateTime createDtm;
 
-
 	@UpdateTimestamp
 	@Column(nullable = false)
 	private LocalDateTime updateDtm;

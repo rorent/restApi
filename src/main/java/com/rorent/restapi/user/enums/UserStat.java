@@ -2,12 +2,14 @@ package com.rorent.restapi.user.enums;
 
 import java.util.Arrays;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.rorent.restapi.config.LegacyCodeCommonType;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum UserStat implements LegacyCodeCommonType {
+
 	NORMAL("10", "정상"),
 	RESTING("50", "휴면"),
 	DELETE("99", "삭제")
@@ -16,6 +18,7 @@ public enum UserStat implements LegacyCodeCommonType {
 	private String code;
 	private String desc;
 
+	@JsonCreator
 	public static UserStat ofCode(String code){
 		return Arrays.stream(UserStat.values())
 				.filter(v -> v.getLegacyCode().equals(code))
