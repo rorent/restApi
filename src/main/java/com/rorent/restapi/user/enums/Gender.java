@@ -3,6 +3,7 @@ package com.rorent.restapi.user.enums;
 import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.rorent.restapi.config.LegacyCodeCommonType;
 
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ public enum Gender implements LegacyCodeCommonType {
 	WOMAN("20", "여자")
 	;
 
+	@JsonValue	//To identify Response return value
 	private String code;
 	private String desc;
 

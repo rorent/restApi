@@ -30,7 +30,7 @@ public class AbstractLegacyEnumAttributeConverter<E extends Enum<E> & LegacyCode
 	public String convertToDatabaseColumn(E attribute) {
 		//모든 Enum 타입 컬럼엔 null, "" 불가
 		if(attribute == null){
-			throw new IllegalArgumentException(MessageFormat.format("{{은 NULL로 저장할 수 없습니다.", enumName));
+			throw new IllegalArgumentException(MessageFormat.format("{0}은 NULL로 저장할 수 없습니다.", enumName));
 		}
 		return LegacyCodeEnumValueConverterUtils.toLegacyCode(attribute);
 	}

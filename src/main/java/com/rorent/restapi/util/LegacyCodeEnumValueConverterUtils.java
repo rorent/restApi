@@ -22,7 +22,7 @@ public class LegacyCodeEnumValueConverterUtils {
 		return EnumSet.allOf(enumClass).stream()
 				.filter(e -> e.getLegacyCode().equals(legacyCode))
 				.findAny()
-				.orElseThrow(() -> new IllegalArgumentException(MessageFormat.format("enum={}에 legacyCode={}가 존재하지 않습니다.", enumClass.getName(), legacyCode)));
+				.orElseThrow(() -> new IllegalArgumentException(MessageFormat.format("enum={0}에 legacyCode={}가 존재하지 않습니다.", enumClass.getName(), legacyCode)));
 	}
 
 	//Enum -> Legacy code

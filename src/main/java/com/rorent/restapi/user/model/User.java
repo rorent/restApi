@@ -28,7 +28,7 @@ import jakarta.persistence.Table;
 @Setter
 @ToString
 @NoArgsConstructor
-public class TbUserVO extends BaseEntity {
+public class User extends BaseEntity {
 
 	/*
 	* GenerationType.IDENTITY 	: 	기본키 생성을 데이터베이스에 위임(auto increments) #em.persist 시 쿼리 실행, Batch Insert(saveAll) 허용 불가
@@ -40,28 +40,35 @@ public class TbUserVO extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	/* Auto_increments */
 	private Long userId;
 
-	@Column(nullable = false)
+	@Column
 	private String userName;
 
+	@Column
 	@Convert(converter = GenderTypeConverter.class)		//Enum Converter 적용
-	@Column(nullable = false)
 	private Gender genderCd;
 
 	private LocalDate birth;
 
 	private String userEmail;
 
+	@Column
 	@Convert(converter = UserStatConverter.class)
-	@Column(nullable = false)
 	private UserStat userStatCd;
 
 	@Builder
-	public TbUserVO(Long userId, String userName, Gender genderCd, LocalDate birth, String userEmail, UserStat userStatCd) {
+	public User(Long userId, String userName, Gender genderCd, LocalDate birth, String userEmail, UserStat userStatCd) {
 		this.userId = userId;
 		this.userName = userName;
 		this.genderCd = genderCd;
 		this.birth = birth;
 		this.userEmail = userEmail;
 		this.userStatCd = userStatCd;
+	}
+
+	public void setUpdateData(User target){
+		this.userName = target.getUserName();
+		this.setGenderCd(target.getGenderCd());
+		this.setBirth(target.getBirth());
+		this.setUserEmail(target.getUserEmail());
 	}
 }

@@ -1,4 +1,4 @@
-package com.rorent.restapi.user.controller;
+package com.rorent.restapi.post.controller;
 
 import java.util.List;
 
@@ -12,44 +12,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rorent.restapi.config.BaseResponse;
+import com.rorent.restapi.post.service.PostService;
 import com.rorent.restapi.user.model.User;
-import com.rorent.restapi.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("api/v1/user")
-public class UserController {
+@RequestMapping("api/v1/post")
+public class PostController {
 
 	@Autowired
-	UserService userService;
+	PostService postService;
 
 	@GetMapping("/getUser")
 	public ResponseEntity<?> getUserInfo(@RequestParam Long id){
-		return ResponseEntity.ok().body(new BaseResponse<User>(userService.findByUserId(id)));
+		return ResponseEntity.ok().body(new BaseResponse<User>(postService.findByUserId(id)));
 	}
 
 	@GetMapping("/getAllUser")
 	public ResponseEntity<?> getUserInfo(){
-		return ResponseEntity.ok().body(new BaseResponse<List<User>>(userService.findAll()));
+		return ResponseEntity.ok().body(new BaseResponse<List<User>>(postService.findAll()));
 	}
 
 	@PostMapping("/insertUser")
 	public ResponseEntity<?> insertUser(@RequestBody User tbUserVO) {
-		userService.insertUser(tbUserVO);
+		postService.insertUser(tbUserVO);
 		return ResponseEntity.ok().body(new BaseResponse());
 	}
 
 	@PostMapping("/updateUser")
-	public ResponseEntity<?> updateUser(@RequestBody User tbUserVO){
-		userService.updateUser(tbUserVO);
+	public ResponseEntity<?> updateUser(@RequestBody User tbUserVO) {
+		postService.updateUser(tbUserVO);
 		return ResponseEntity.ok().body(new BaseResponse());
 	}
 
 	@GetMapping("/deleteUser")
 	public ResponseEntity<?> updateUser(@RequestParam Long id) {
-		userService.deleteById(id);
+		postService.deleteById(id);
 		return ResponseEntity.ok().body(new BaseResponse());
 	}
 }

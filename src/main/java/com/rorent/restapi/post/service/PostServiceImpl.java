@@ -1,4 +1,4 @@
-package com.rorent.restapi.user.service;
+package com.rorent.restapi.post.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rorent.restapi.exception.BizErrorCode;
-import com.rorent.restapi.exception.BizException;
+import com.rorent.restapi.exception.SysException;
+import com.rorent.restapi.exception.SysErrorCode;
 import com.rorent.restapi.user.enums.UserStat;
 import com.rorent.restapi.user.model.User;
 import com.rorent.restapi.user.repository.TbUserVORespository;
@@ -15,7 +15,7 @@ import com.rorent.restapi.user.repository.TbUserVORespository;
 import jakarta.transaction.Transactional;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class PostServiceImpl implements PostService {
 
 	@Autowired
 	TbUserVORespository tbUserVORespository;
@@ -43,11 +43,9 @@ public class UserServiceImpl implements UserService {
 		Optional<User> optUser = tbUserVORespository.findById(vo.getUserId());
 
 		if(optUser.isPresent()){
-			User orgData = optUser.get();
-			orgData.setUpdateData(vo);
-			tbUserVORespository.save(orgData);
+			tbUserVORespository.save(vo);
 		}else{
-			throw new BizException(BizErrorCode.INVALID_PARAM);
+			throw new SysException(SysErrorCode.NOT_FOUND_DATA);
 		}
 	}
 

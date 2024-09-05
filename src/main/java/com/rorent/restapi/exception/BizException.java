@@ -1,17 +1,20 @@
 package com.rorent.restapi.exception;
 
-import java.util.Optional;
+import lombok.Getter;
 
+@Getter
 public class BizException extends RuntimeException {
-	private static final long serialVersionUID = -4296009690948190484L;
-	private ErrorCode errorCode;
 
-	public BizException(ErrorCode errorCode) {
-		this.errorCode = errorCode;
+	private static final long serialVersionUID = -1009732554191309175L;
+
+	private BizErrorCode bizErrorCode;
+
+	public BizException(BizErrorCode bizErrorCode) {
+		this.bizErrorCode = bizErrorCode;
 	}
 
-	public BizException(Throwable e, ErrorCode errorCode) {
-		super(Optional.of(errorCode.getMessage()).orElse(errorCode.getStatus().getReasonPhrase()), e);
-		this.errorCode = errorCode;
+	public BizException(Throwable e, BizErrorCode bizErrorCode) {
+		super(bizErrorCode.getMessage());
+		this.bizErrorCode = bizErrorCode;
 	}
 }

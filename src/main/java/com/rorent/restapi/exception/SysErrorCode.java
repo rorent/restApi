@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import lombok.Getter;
 
 @Getter
-public enum ErrorCode {
+public enum SysErrorCode {
 	/** invalid header exception */
 	INVALID_HEADER_EXCEPTION(HttpStatus.PRECONDITION_FAILED, "412", "Invalid Header Value"),
 	/** invalid id secret exception */
@@ -21,12 +21,12 @@ public enum ErrorCode {
 	private String message;
 
 
-	private ErrorCode(HttpStatus status, String code) {
+	private SysErrorCode(HttpStatus status, String code) {
 		this.status = status;
 		this.code = code;
 	}
 
-	private ErrorCode(HttpStatus status, String code, String message) {
+	private SysErrorCode(HttpStatus status, String code, String message) {
 		this.status = status;
 		this.code = code;
 		this.message = message;

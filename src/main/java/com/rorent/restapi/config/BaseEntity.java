@@ -18,7 +18,7 @@ public abstract class BaseEntity {
 	@Column(updatable = false, nullable = false)
 	private LocalDateTime createDtm;
 
-	@UpdateTimestamp
+	@UpdateTimestamp	//생성시에도 dtm 적용.
 	@Column(nullable = false)
 	private LocalDateTime updateDtm;
 
