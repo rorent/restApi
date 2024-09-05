@@ -1,10 +1,6 @@
 package com.rorent.restapi.user.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import com.rorent.restapi.config.BaseEntity;
 import com.rorent.restapi.user.converter.GenderTypeConverter;
