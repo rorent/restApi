@@ -10,7 +10,7 @@ import com.rorent.restapi.exception.SysException;
 import com.rorent.restapi.exception.SysErrorCode;
 import com.rorent.restapi.user.enums.UserStat;
 import com.rorent.restapi.user.model.User;
-import com.rorent.restapi.user.repository.TbUserVORespository;
+import com.rorent.restapi.user.repository.UserRespository;
 
 import jakarta.transaction.Transactional;
 
@@ -18,32 +18,32 @@ import jakarta.transaction.Transactional;
 public class PostServiceImpl implements PostService {
 
 	@Autowired
-	TbUserVORespository tbUserVORespository;
+	UserRespository userRespository;
 
 	@Override
 	public List<User> findAll() {
-		return tbUserVORespository.findAll();
+		return userRespository.findAll();
 	}
 
 	@Override
 	public User findByUserId(Long id) {
-		return tbUserVORespository.findById(id).orElse(null);
+		return userRespository.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public void insertUser(User vo) {
 		vo.setUserStatCd(UserStat.NORMAL);
-		tbUserVORespository.save(vo);
+		userRespository.save(vo);
 	}
 
 	@Override
 	@Transactional
 	public void updateUser(User vo) {
-		Optional<User> optUser = tbUserVORespository.findById(vo.getUserId());
+		Optional<User> optUser = userRespository.findById(vo.getUserId());
 
 		if(optUser.isPresent()){
-			tbUserVORespository.save(vo);
+			userRespository.save(vo);
 		}else{
 			throw new SysException(SysErrorCode.NOT_FOUND_DATA);
 		}
@@ -52,6 +52,6 @@ public class PostServiceImpl implements PostService {
 	@Override
 	@Transactional
 	public void deleteById(Long id) {
-		tbUserVORespository.deleteById(id);
+		userRespository.deleteById(id);
 	}
 }

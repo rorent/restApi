@@ -10,7 +10,7 @@ import com.rorent.restapi.exception.BizErrorCode;
 import com.rorent.restapi.exception.BizException;
 import com.rorent.restapi.user.enums.UserStat;
 import com.rorent.restapi.user.model.User;
-import com.rorent.restapi.user.repository.TbUserVORespository;
+import com.rorent.restapi.user.repository.UserRespository;
 
 import jakarta.transaction.Transactional;
 
@@ -18,34 +18,34 @@ import jakarta.transaction.Transactional;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	TbUserVORespository tbUserVORespository;
+	UserRespository userRespository;
 
 	@Override
 	public List<User> findAll() {
-		return tbUserVORespository.findAll();
+		return userRespository.findAll();
 	}
 
 	@Override
 	public User findByUserId(Long id) {
-		return tbUserVORespository.findById(id).orElse(null);
+		return userRespository.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public void insertUser(User vo) {
 		vo.setUserStatCd(UserStat.NORMAL);
-		tbUserVORespository.save(vo);
+		userRespository.save(vo);
 	}
 
 	@Override
 	@Transactional
 	public void updateUser(User vo) {
-		Optional<User> optUser = tbUserVORespository.findById(vo.getUserId());
+		Optional<User> optUser = userRespository.findById(vo.getUserId());
 
 		if(optUser.isPresent()){
 			User orgData = optUser.get();
 			orgData.setUpdateData(vo);
-			tbUserVORespository.save(orgData);
+			userRespository.save(orgData);
 		}else{
 			throw new BizException(BizErrorCode.INVALID_PARAM);
 		}
@@ -54,6 +54,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void deleteById(Long id) {
-		tbUserVORespository.deleteById(id);
+		userRespository.deleteById(id);
 	}
 }
