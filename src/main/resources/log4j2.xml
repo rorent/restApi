@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- appender : where -->
+<!-- layout : how -->
+<!-- message : what -->
+<!-- logger : who -->
+<!-- logging event level : logger가 메시지를 기록할 지 여부를 결정하는 기준. -->
+<!-- debug -> info -> warn -> error -> fatal -->
+<!-- logger에 설정된 이벤트 등급 이상의 이벤트만 기록. -->
+
+<Configuration status="WARN">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%t] %-5level %logger{1.} - %msg%n"/>
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.rorent.*" level="info" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<Logger name="jdbc.sqltiming" level="debug" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<Logger name="jdbc.resultsettable" level="debug" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<Logger name="org.hibernate.sql" level="INFO">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<!-- 콘솔차에 조건에 바인딩되는 값 및 조회 결과 출력 -->
+		<Logger name="org.hibernate.type" level="INFO">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<!-- sql의 ? 값을 Parameter로 보여줌.-->
+		<Logger name="org.hibernate.type.descriptor.sql" level="INFO">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<Logger name="com.zaxxer.hikari.pool" level="DEBUG">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<Logger name="org.mongodb.driver.*" level="INFO">
+			<AppenderRef ref="Console"/>
+		</Logger>
+
+		<Root level="error">
+			<AppenderRef ref="Console"/>
+		</Root>
+	</Loggers>
+</Configuration>

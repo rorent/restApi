@@ -54,6 +54,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void deleteById(Long id) {
-		userRespository.deleteById(id);
+		Optional<User> optUser = userRespository.findById(id);
+
+		if(optUser.isPresent()){
+			userRespository.deleteById(id);
+		}else{
+			throw new BizException(BizErrorCode.INVALID_PARAM);
+		}
+
 	}
 }

@@ -1,6 +1,6 @@
 package com.rorent.restapi.post.model;
 
-import com.rorent.restapi.config.BaseEntity;
+import com.rorent.restapi.config.model.BaseEntity;
 import com.rorent.restapi.user.model.User;
 
 import lombok.Builder;

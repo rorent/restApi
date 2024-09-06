@@ -1,4 +1,4 @@
-package com.rorent.restapi.config;
+package com.rorent.restapi.config.model;
 
 import java.time.LocalDateTime;
 

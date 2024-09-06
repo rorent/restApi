@@ -1,4 +1,4 @@
-package com.rorent.restapi.config;
+package com.rorent.restapi.config.model;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,6 +9,7 @@ import com.rorent.restapi.exception.SysException;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+//전역 Exception Handler (특정 package 설정인 경우 basePackages 작성)
 @RestControllerAdvice
 public class RestApiExceptionHandler {
 

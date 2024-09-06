@@ -2,8 +2,8 @@ package com.rorent.restapi.user.model;
 
 import java.time.LocalDate;
 
-import com.rorent.restapi.config.BaseEntity;
-import com.rorent.restapi.user.converter.GenderTypeConverter;
+import com.rorent.restapi.config.model.BaseEntity;
+import com.rorent.restapi.user.converter.GenderConverter;
 import com.rorent.restapi.user.converter.UserStatConverter;
 import com.rorent.restapi.user.enums.Gender;
 import com.rorent.restapi.user.enums.UserStat;
@@ -44,7 +44,7 @@ public class User extends BaseEntity {
 	private String userName;
 
 	@Column
-	@Convert(converter = GenderTypeConverter.class)		//Enum Converter 적용
+	@Convert(converter = GenderConverter.class)		//Enum Converter 적용
 	private Gender genderCd;
 
 	private LocalDate birth;
@@ -67,8 +67,8 @@ public class User extends BaseEntity {
 
 	public void setUpdateData(User target){
 		this.userName = target.getUserName();
-		this.setGenderCd(target.getGenderCd());
-		this.setBirth(target.getBirth());
-		this.setUserEmail(target.getUserEmail());
+		this.genderCd = target.getGenderCd();
+		this.birth = target.getBirth();
+		this.userEmail = target.getUserEmail();
 	}
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rorent.restapi.config.BaseResponse;
+import com.rorent.restapi.config.model.BaseResponse;
 import com.rorent.restapi.user.model.User;
 import com.rorent.restapi.user.service.UserService;
 
@@ -48,7 +48,7 @@ public class UserController {
 	}
 
 	@GetMapping("/deleteUser")
-	public ResponseEntity<?> updateUser(@RequestParam Long id) {
+	public ResponseEntity<?> deleteUser(@RequestParam Long id) {
 		userService.deleteById(id);
 		return ResponseEntity.ok().body(new BaseResponse());
 	}
