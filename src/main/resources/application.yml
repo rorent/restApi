@@ -39,6 +39,8 @@ spring:
         jdbc:
           batch_size: 1000  # saveAll batch Insert and Update Option
 
+logging:
+  config: classpath:log.xml
 
 
 
